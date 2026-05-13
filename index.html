@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stanford O'quv Markazi | IELTS & English Centre</title>
+  <meta name="description" content="Namangan's leading IELTS preparation and English learning centre." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="features.css" />
+</head>
+<body>
+
+<!--
+  ================================================================
+  HOW TRANSLATION WORKS
+  ─────────────────────
+  Every piece of text has data-i18n="key" on its element.
+  When language is switched, features.js looks up that key
+  in the TRANSLATIONS object and swaps the text.
+
+  data-i18n      = plain text swap (textContent)
+  data-i18n-html = HTML swap (innerHTML) — use for elements
+                   that contain <strong>, <span>, <br> etc.
+
+  To translate a new element:
+  1. Add data-i18n="your.key" to the HTML element
+  2. Add "your.key": "translation" to each language in features.js
+  ================================================================
+-->
+
+
+<!-- ============================================================
+  NAVBAR
+============================================================ -->
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+
+    <!-- Logo — "Stanford" and ".lc" are separate spans so
+         only ".lc" gets the blue colour via CSS -->
+    <a href="#home" class="navbar__logo">
+      <div class="navbar__logo-icon">🎓</div>
+      <!-- Logo never translates — brand name stays the same in all languages -->
+      <span>Stanford<em>.lc</em></span>
+    </a>
+
+    <nav class="navbar__links" id="navLinks">
+      <a href="#home"      class="navbar__link active" data-i18n="nav.home">Home</a>
+      <a href="#about"     class="navbar__link"        data-i18n="nav.about">About</a>
+      <a href="#courses"   class="navbar__link"        data-i18n="nav.courses">Courses</a>
+      <a href="#teachers"  class="navbar__link"        data-i18n="nav.teachers">Teachers</a>
+      <a href="#results"   class="navbar__link"        data-i18n="nav.results">Results</a>
+      <a href="#contact"   class="navbar__link"        data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <button class="btn btn--primary navbar__cta" data-open="trial-modal" data-i18n="nav.apply">
+      Apply Now
+    </button>
+
+    <!-- Mobile lang toggle — sits beside the burger button, always visible on phones -->
+    <div class="navbar__mobile-lang" id="mobileLangRow">
+      <button class="lang-toggle__btn" data-lang="uz">UZ</button>
+      <button class="lang-toggle__btn" data-lang="ru">RU</button>
+      <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    </div>
+
+    <button class="navbar__burger" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</header>
+
+
+<!-- ============================================================
+  HERO SECTION
+============================================================ -->
+<section class="hero" id="home">
+  <div class="hero__bg-grid"    aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <div class="hero__content">
+
+      <!-- Enrolment badge -->
+      <div class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        <span data-i18n="hero.badge">Now Enrolling — Summer 2025 · Namangan</span>
+      </div>
+
+      <!-- Headline — uses data-i18n-html because it contains <span class="highlight"> -->
+      <h1 class="hero__headline" data-i18n-html="hero.headline">
+        Achieve <span class="highlight">IELTS 7.0+</span><br />with Expert Teachers
+      </h1>
+
+      <!-- Sub-copy -->
+      <p class="hero__sub" data-i18n="hero.sub">
+        Stanford O'quv Markazi is Namangan's most trusted English &amp; exam
+        preparation centre. Proven methods, certified teachers, real results.
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="hero__actions">
+        <button class="btn btn--yellow" data-open="trial-modal" data-i18n="hero.cta1">
+          Apply Now →
+        </button>
+        <a href="#courses" class="btn btn--outline" data-i18n="hero.cta2">
+          View Courses
+        </a>
+      </div>
+
+      <!-- Trust stats -->
+      <div class="hero__trust">
+        <div class="hero__trust-item">
+          <div class="hero__trust-num">
+            <strong class="counter" data-target="5000">0</strong>
+            <span class="hero__trust-suffix">+</span>
+          </div>
+          <span class="hero__trust-label" data-i18n="hero.stat1">Students</span>
+        </div>
+        <div class="hero__trust-divider" aria-hidden="true"></div>
+        <div class="hero__trust-item">
+          <div class="hero__trust-num"><strong>8.5</strong></div>
+          <span class="hero__trust-label" data-i18n="hero.stat2">Top Band</span>
+        </div>
+        <div class="hero__trust-divider" aria-hidden="true"></div>
+        <div class="hero__trust-item">
+          <div class="hero__trust-num">
+            <strong class="counter" data-target="96">0</strong>
+            <span class="hero__trust-suffix">%</span>
+          </div>
+          <span class="hero__trust-label" data-i18n="hero.stat3">Pass Rate</span>
+        </div>
+      </div>
+
+      <!-- Next free trial badge -->
+      <div class="trial-badge">
+        <span class="trial-badge__icon">🗓</span>
+        <span>
+          <span data-i18n="trial.next">Next free trial:</span>
+          <strong> June 14</strong>&nbsp;·&nbsp;
+          <span class="trial-badge__spots" data-i18n="trial.spots">6 spots left</span>
+        </span>
+        <button class="trial-badge__btn" data-open="trial-modal" data-i18n="trial.btn">
+          Book it
+        </button>
+      </div>
+
+    </div><!-- /hero__content -->
+
+    <!-- Floating cards — desktop only -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__card hero__card--1">
+        <div class="hero__card-icon">🏆</div>
+        <div class="hero__card-label" data-i18n="card1.label">Top Score</div>
+        <div class="hero__card-value" data-i18n="card1.value">IELTS 8.5</div>
+      </div>
+      <div class="hero__card hero__card--2">
+        <div class="hero__card-icon">📈</div>
+        <div class="hero__card-label" data-i18n="card2.label">Avg Improvement</div>
+        <div class="hero__card-value" data-i18n="card2.value">+1.5 Bands</div>
+      </div>
+      <div class="hero__card hero__card--3">
+        <div class="hero__card-partner-logos">
+          <svg class="brand-icon brand-icon--idp" viewBox="0 0 56 28" xmlns="http://www.w3.org/2000/svg" aria-label="IDP IELTS">
+            <rect width="56" height="28" rx="5" fill="#003087"/>
+            <text x="28" y="12" text-anchor="middle" fill="#F5C100" font-family="Arial,sans-serif" font-size="8" font-weight="900" letter-spacing="1">IDP</text>
+            <text x="28" y="22" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="6" font-weight="700" letter-spacing="0.5">IELTS</text>
+          </svg>
+          <svg class="brand-icon brand-icon--bc" viewBox="0 0 100 28" xmlns="http://www.w3.org/2000/svg" aria-label="British Council">
+            <rect width="100" height="28" rx="5" fill="#003087"/>
+            <rect width="8" height="28" rx="0" fill="#00B5E2"/>
+            <rect x="0" y="0" width="8" height="28" rx="0" fill="#00B5E2"/>
+            <text x="57" y="12" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="7" font-weight="900" letter-spacing="0.8">BRITISH</text>
+            <text x="57" y="22" text-anchor="middle" fill="#00B5E2" font-family="Arial,sans-serif" font-size="7" font-weight="700" letter-spacing="0.8">COUNCIL</text>
+          </svg>
+        </div>
+        <div class="hero__card-value hero__card-value--sm" data-i18n="card3.value">IDP &amp; BC Partner</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+  STATS BAND
+============================================================ -->
+<div class="stats-band">
+  <div class="container stats-band__inner">
+    <div class="stats-band__item">
+      <div class="stats-band__num">
+        <strong class="counter" data-target="5000">0</strong><span>+</span>
+      </div>
+      <p data-i18n="stats.s1">Students Taught</p>
+    </div>
+    <div class="stats-band__item">
+      <div class="stats-band__num"><strong>8.5</strong><span>⭐</span></div>
+      <p data-i18n="stats.s2">Top IELTS Band</p>
+    </div>
+    <div class="stats-band__item">
+      <div class="stats-band__num">
+        <strong class="counter" data-target="96">0</strong><span>%</span>
+      </div>
+      <p data-i18n="stats.s3">Target Score Rate</p>
+    </div>
+    <div class="stats-band__item">
+      <div class="stats-band__num">
+        <strong class="counter" data-target="10">0</strong><span>+</span>
+      </div>
+      <p data-i18n="stats.s4">Expert Teachers</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  ABOUT SECTION
+============================================================ -->
+<section class="about section" id="about">
+  <div class="container about__inner">
+
+    <div class="about__text">
+      <span class="section-tag"  data-i18n="about.tag">Our Story</span>
+      <h2 class="section-title"  data-i18n="about.title">Built to Get You Results</h2>
+      <!-- data-i18n-html used because paragraphs contain <strong> tags -->
+      <p data-i18n-html="about.p1">
+        Stanford O'quv Markazi was founded in <strong>2015</strong> with one goal:
+        give every student in Uzbekistan access to world-class English education.
+      </p>
+      <p data-i18n-html="about.p2">
+        We specialise in <strong>IELTS, CEFR, and DTM</strong> preparation as well
+        as pre-school English. Proven international methods, local expertise.
+      </p>
+      <p data-i18n-html="about.p3">
+        As an official <strong>IDP IELTS &amp; British Council partner</strong>,
+        we meet the highest global standards — and our results prove it.
+      </p>
+
+      <ul class="about__values">
+        <li class="about__value">
+          <span class="about__value-icon">🎯</span>
+          <div>
+            <strong data-i18n="about.v1t">Results-Focused</strong>
+            <p      data-i18n="about.v1d">Every lesson is built to move your score up.</p>
+          </div>
+        </li>
+        <li class="about__value">
+          <span class="about__value-icon">👥</span>
+          <div>
+            <strong data-i18n="about.v2t">Small Groups</strong>
+            <p      data-i18n="about.v2d">Max 12 students — personal attention guaranteed.</p>
+          </div>
+        </li>
+        <li class="about__value">
+          <span class="about__value-icon">🌍</span>
+          <div>
+            <strong data-i18n="about.v3t">Global Standards</strong>
+            <p      data-i18n="about.v3d">IDP &amp; British Council certified methodology.</p>
+          </div>
+        </li>
+        <li class="about__value">
+          <span class="about__value-icon">💛</span>
+          <div>
+            <strong data-i18n="about.v4t">Supportive Culture</strong>
+            <p      data-i18n="about.v4d">We celebrate every win, big and small.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="about__cards">
+      <div class="about__stat-card about__stat-card--blue">
+        <div>
+          <div class="about__stat-num"   data-i18n="about.c1n">2015</div>
+          <div class="about__stat-label" data-i18n="about.c1l">Year Founded</div>
+        </div>
+        <span class="about__stat-emoji">🏛️</span>
+      </div>
+      <div class="about__stat-card about__stat-card--yellow">
+        <div>
+          <div class="about__stat-num"   data-i18n="about.c2n">5,000+</div>
+          <div class="about__stat-label" data-i18n="about.c2l">Students Taught</div>
+        </div>
+        <span class="about__stat-emoji">👨‍🎓</span>
+      </div>
+      <div class="about__stat-card about__stat-card--dark">
+        <div>
+          <div class="about__stat-num"   data-i18n="about.c3n">10+</div>
+          <div class="about__stat-label" data-i18n="about.c3l">Certified Teachers</div>
+        </div>
+        <span class="about__stat-emoji">👩‍🏫</span>
+      </div>
+      <div class="about__partner">
+        <svg class="brand-icon brand-icon--idp" viewBox="0 0 56 28" xmlns="http://www.w3.org/2000/svg" aria-label="IDP IELTS">
+            <rect width="56" height="28" rx="5" fill="#003087"/>
+            <text x="28" y="12" text-anchor="middle" fill="#F5C100" font-family="Arial,sans-serif" font-size="8" font-weight="900" letter-spacing="1">IDP</text>
+            <text x="28" y="22" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="6" font-weight="700" letter-spacing="0.5">IELTS</text>
+          </svg>
+        <svg class="brand-icon brand-icon--bc" viewBox="0 0 100 28" xmlns="http://www.w3.org/2000/svg" aria-label="British Council">
+            <rect width="100" height="28" rx="5" fill="#003087"/>
+            <rect width="8" height="28" rx="0" fill="#00B5E2"/>
+            <rect x="0" y="0" width="8" height="28" rx="0" fill="#00B5E2"/>
+            <text x="57" y="12" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="7" font-weight="900" letter-spacing="0.8">BRITISH</text>
+            <text x="57" y="22" text-anchor="middle" fill="#00B5E2" font-family="Arial,sans-serif" font-size="7" font-weight="700" letter-spacing="0.8">COUNCIL</text>
+          </svg>
+        <span data-i18n="about.partner">Official Partner: IDP IELTS &amp; British Council</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+  COURSES SECTION
+============================================================ -->
+<section class="courses section section--alt" id="courses">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="courses.tag">Programs</span>
+      <h2 class="section-title" data-i18n="courses.title">Find Your Course</h2>
+      <p class="section-sub"    data-i18n="courses.sub">
+        From beginner English to advanced IELTS — a course for every level, age, and goal.
+      </p>
+    </div>
+
+    <div class="courses__grid">
+
+      <div class="course-card">
+        <div class="course-card__thumb course-card__thumb--blue">📚</div>
+        <div class="course-card__body">
+          <span class="course-card__badge course-card__badge--blue" data-i18n="c1.badge">IELTS</span>
+          <h3 data-i18n="c1.title">IELTS Intensive</h3>
+          <p  data-i18n="c1.desc">Score 6.5–8.5 with targeted prep. Full mock tests, band-raising strategies, and expert feedback.</p>
+          <div class="course-card__meta">
+            <span data-i18n="c1.meta">All levels · 3–6 months</span>
+            <button class="btn btn--sm" data-open="trial-modal" data-i18n="courses.enroll">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card__thumb course-card__thumb--yellow">✏️</div>
+        <div class="course-card__body">
+          <span class="course-card__badge course-card__badge--yellow" data-i18n="c2.badge">General</span>
+          <h3 data-i18n="c2.title">General English</h3>
+          <p  data-i18n="c2.desc">Build a strong foundation. Grammar, vocabulary, reading, writing, listening and speaking in one course.</p>
+          <div class="course-card__meta">
+            <span data-i18n="c2.meta">Beginner – Advanced</span>
+            <button class="btn btn--sm" data-open="trial-modal" data-i18n="courses.enroll">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card__thumb course-card__thumb--green">🌐</div>
+        <div class="course-card__body">
+          <span class="course-card__badge course-card__badge--green" data-i18n="c3.badge">CEFR</span>
+          <h3 data-i18n="c3.title">CEFR A1 → C2</h3>
+          <p  data-i18n="c3.desc">Internationally recognised proficiency pathway. Build real communication skills from A1 through C2.</p>
+          <div class="course-card__meta">
+            <span data-i18n="c3.meta">A1 to C2 · All ages</span>
+            <button class="btn btn--sm" data-open="trial-modal" data-i18n="courses.enroll">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-card__thumb course-card__thumb--pink">🧒</div>
+        <div class="course-card__body">
+          <span class="course-card__badge course-card__badge--pink" data-i18n="c4.badge">Pre-school</span>
+          <h3 data-i18n="c4.title">Early Learners</h3>
+          <p  data-i18n="c4.desc">Play-based English for children aged 4–10. Songs, stories, games and gentle structured learning.</p>
+          <div class="course-card__meta">
+            <span data-i18n="c4.meta">Ages 4–10</span>
+            <button class="btn btn--sm" data-open="trial-modal" data-i18n="courses.enroll">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  TEACHERS SECTION
+============================================================ -->
+<section class="teachers section" id="teachers">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="teachers.tag">The Team</span>
+      <h2 class="section-title" data-i18n="teachers.title">Meet Your Teachers</h2>
+      <p class="section-sub"    data-i18n="teachers.sub">Certified, experienced, and genuinely invested in your success.</p>
+    </div>
+
+    <div class="teachers__grid">
+
+      <!-- Teacher 1 -->
+      <div class="teacher-card">
+        <div class="teacher-card__avatar teacher-card__avatar--blue">👩‍🏫</div>
+        <div class="teacher-card__body">
+          <h3 class="teacher-card__name" data-i18n="t1.name">Malika Yusupova</h3>
+          <p  class="teacher-card__role" data-i18n="t1.role">Head of IELTS Department</p>
+          <ul class="teacher-card__stats">
+            <li><strong data-i18n="t.score">IELTS:</strong> <span data-i18n="t1.score">Band 8.5</span></li>
+            <li><strong data-i18n="t.cert">Cert:</strong>  <span data-i18n="t1.cert">CELTA, IDP</span></li>
+            <li><strong data-i18n="t.exp">Exp:</strong>   <span data-i18n="t1.exp">8+ years</span></li>
+          </ul>
+          <p class="teacher-card__bio" data-i18n="t1.bio">
+            Specialist in Writing &amp; Reading. Helped 300+ students reach band 7+.
+          </p>
+          <div class="teacher-card__tags">
+            <span data-i18n="t1.tag1">IELTS</span>
+            <span data-i18n="t1.tag2">Writing</span>
+            <span data-i18n="t1.tag3">CELTA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher 2 -->
+      <div class="teacher-card">
+        <div class="teacher-card__avatar teacher-card__avatar--yellow">👨‍🏫</div>
+        <div class="teacher-card__body">
+          <h3 class="teacher-card__name" data-i18n="t2.name">James O'Brien</h3>
+          <p  class="teacher-card__role" data-i18n="t2.role">Native English Instructor</p>
+          <ul class="teacher-card__stats">
+            <li><strong data-i18n="t.from">From:</strong> <span data-i18n="t2.from">Dublin 🇮🇪</span></li>
+            <li><strong data-i18n="t.cert">Cert:</strong> <span data-i18n="t2.cert">DELTA, CELTA</span></li>
+            <li><strong data-i18n="t.exp">Exp:</strong>  <span data-i18n="t2.exp">6 years</span></li>
+          </ul>
+          <p class="teacher-card__bio" data-i18n="t2.bio">
+            Specialises in Speaking &amp; Listening. Praised for patience and clarity.
+          </p>
+          <div class="teacher-card__tags">
+            <span data-i18n="t2.tag1">Speaking</span>
+            <span data-i18n="t2.tag2">Listening</span>
+            <span data-i18n="t2.tag3">Native</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher 3 -->
+      <div class="teacher-card">
+        <div class="teacher-card__avatar teacher-card__avatar--pink">👩‍🏫</div>
+        <div class="teacher-card__body">
+          <h3 class="teacher-card__name" data-i18n="t3.name">Dilnoza Hamidova</h3>
+          <p  class="teacher-card__role" data-i18n="t3.role">Pre-school &amp; Junior Lead</p>
+          <ul class="teacher-card__stats">
+            <li><strong data-i18n="t.score">IELTS:</strong> <span data-i18n="t3.score">Band 7.5</span></li>
+            <li><strong data-i18n="t.cert">Cert:</strong>  <span data-i18n="t3.cert">Early Childhood</span></li>
+            <li><strong data-i18n="t.exp">Exp:</strong>   <span data-i18n="t3.exp">7 years</span></li>
+          </ul>
+          <p class="teacher-card__bio" data-i18n="t3.bio">
+            Makes English magical for ages 4–10 through play, songs, and storytelling.
+          </p>
+          <div class="teacher-card__tags">
+            <span data-i18n="t3.tag1">Pre-school</span>
+            <span data-i18n="t3.tag2">Junior</span>
+            <span data-i18n="t3.tag3">Kids</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher 4 -->
+      <div class="teacher-card">
+        <div class="teacher-card__avatar teacher-card__avatar--green">👨‍🏫</div>
+        <div class="teacher-card__body">
+          <h3 class="teacher-card__name" data-i18n="t4.name">Bobur Toshmatov</h3>
+          <p  class="teacher-card__role" data-i18n="t4.role">DTM &amp; CEFR Specialist</p>
+          <ul class="teacher-card__stats">
+            <li><strong data-i18n="t.score">IELTS:</strong> <span data-i18n="t4.score">Band 8.0</span></li>
+            <li><strong data-i18n="t.cert">Cert:</strong>  <span data-i18n="t4.cert">Cambridge TKT</span></li>
+            <li><strong data-i18n="t.exp">Exp:</strong>   <span data-i18n="t4.exp">12 years</span></li>
+          </ul>
+          <p class="teacher-card__bio" data-i18n="t4.bio">
+            University lecturer, expert in DTM structure and CEFR A1–C2 pathway.
+          </p>
+          <div class="teacher-card__tags">
+            <span data-i18n="t4.tag1">DTM</span>
+            <span data-i18n="t4.tag2">CEFR</span>
+            <span data-i18n="t4.tag3">Grammar</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  RESULTS SECTION
+============================================================ -->
+<section class="results section section--alt" id="results">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="results.tag">Proof</span>
+      <h2 class="section-title" data-i18n="results.title">Real Students. Real Scores.</h2>
+      <p class="section-sub"    data-i18n="results.sub">Results from students who walked through our door and committed to the process.</p>
+    </div>
+
+    <div class="results__grid">
+
+      <div class="score-card">
+        <div class="score-card__top">
+          <div class="score-card__avatar">AK</div>
+          <div class="score-card__bands">
+            <div><span class="score-card__val">5.0</span><span class="score-card__lbl" data-i18n="score.before">Before</span></div>
+            <span class="score-card__arrow">→</span>
+            <div><span class="score-card__val">7.5</span><span class="score-card__lbl" data-i18n="score.after">After</span></div>
+          </div>
+        </div>
+        <div class="score-card__body">
+          <strong data-i18n="r1.name">Aziz Karimov</strong>
+          <p      data-i18n="r1.course">IELTS Intensive · 4 months</p>
+          <span class="score-card__tag" data-i18n="r1.tag">+2.5 bands</span>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card__top score-card__top--gold">
+          <div class="score-card__avatar">SR</div>
+          <div class="score-card__bands">
+            <div><span class="score-card__val">5.5</span><span class="score-card__lbl" data-i18n="score.before">Before</span></div>
+            <span class="score-card__arrow">→</span>
+            <div><span class="score-card__val">8.0</span><span class="score-card__lbl" data-i18n="score.after">After</span></div>
+          </div>
+        </div>
+        <div class="score-card__body">
+          <strong data-i18n="r2.name">Sarvar Rakhimov</strong>
+          <p      data-i18n="r2.course">IELTS Intensive · 3 months</p>
+          <span class="score-card__tag" data-i18n="r2.tag">+2.5 bands</span>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card__top score-card__top--green">
+          <div class="score-card__avatar">MN</div>
+          <div class="score-card__bands">
+            <div><span class="score-card__val">A2</span><span class="score-card__lbl" data-i18n="score.before">Before</span></div>
+            <span class="score-card__arrow">→</span>
+            <div><span class="score-card__val">B2</span><span class="score-card__lbl" data-i18n="score.after">After</span></div>
+          </div>
+        </div>
+        <div class="score-card__body">
+          <strong data-i18n="r3.name">Malika Nazarova</strong>
+          <p      data-i18n="r3.course">CEFR Pathway · 8 months</p>
+          <span class="score-card__tag" data-i18n="r3.tag">2 levels up</span>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card__top">
+          <div class="score-card__avatar">JT</div>
+          <div class="score-card__bands">
+            <div><span class="score-card__val">6.0</span><span class="score-card__lbl" data-i18n="score.before">Before</span></div>
+            <span class="score-card__arrow">→</span>
+            <div><span class="score-card__val">8.5</span><span class="score-card__lbl" data-i18n="score.after">After</span></div>
+          </div>
+        </div>
+        <div class="score-card__body">
+          <strong data-i18n="r4.name">Jasur Toshmatov</strong>
+          <p      data-i18n="r4.course">IELTS Intensive · 5 months</p>
+          <span class="score-card__tag" data-i18n="r4.tag">+2.5 bands</span>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card__top score-card__top--green">
+          <div class="score-card__avatar">ZI</div>
+          <div class="score-card__bands">
+            <div><span class="score-card__val">B1</span><span class="score-card__lbl" data-i18n="score.before">Before</span></div>
+            <span class="score-card__arrow">→</span>
+            <div><span class="score-card__val">C1</span><span class="score-card__lbl" data-i18n="score.after">After</span></div>
+          </div>
+        </div>
+        <div class="score-card__body">
+          <strong data-i18n="r5.name">Zulfiya Ismoilova</strong>
+          <p      data-i18n="r5.course">CEFR Pathway · 6 months</p>
+          <span class="score-card__tag" data-i18n="r5.tag">2 levels up</span>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card__top score-card__top--gold">
+          <div class="score-card__avatar">BU</div>
+          <div class="score-card__bands">
+            <div><span class="score-card__val">4.5</span><span class="score-card__lbl" data-i18n="score.before">Before</span></div>
+            <span class="score-card__arrow">→</span>
+            <div><span class="score-card__val">7.0</span><span class="score-card__lbl" data-i18n="score.after">After</span></div>
+          </div>
+        </div>
+        <div class="score-card__body">
+          <strong data-i18n="r6.name">Bobur Umarov</strong>
+          <p      data-i18n="r6.course">IELTS Intensive · 6 months</p>
+          <span class="score-card__tag" data-i18n="r6.tag">+2.5 bands</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="achievements">
+      <div class="achievement">
+        <strong class="counter" data-target="5000">0</strong><span>+</span>
+        <p data-i18n="ach.s1">Students Taught</p>
+      </div>
+      <div class="achievement">
+        <strong class="counter" data-target="85">0</strong><span>%</span>
+        <p data-i18n="ach.s2">Success Rate</p>
+      </div>
+      <div class="achievement">
+        <strong class="counter" data-target="28">0</strong><span>+</span>
+        <p data-i18n="ach.s3">Universities Abroad</p>
+      </div>
+      <div class="achievement">
+        <strong>8.5</strong>
+        <p data-i18n="ach.s4">Top IELTS Score</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+  TESTIMONIALS SECTION
+============================================================ -->
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="testi.tag">Testimonials</span>
+      <h2 class="section-title" data-i18n="testi.title">What Students Say</h2>
+    </div>
+
+    <div class="testi__grid">
+
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__quote" data-i18n="q1.quote">
+          "I came in at band 5.0 and left with 7.5. The teachers really know how to
+          target your weak areas. Stanford changed my life."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar testi-card__avatar--blue">AK</div>
+          <div>
+            <strong data-i18n="q1.name">Aziz Karimov</strong>
+            <span   data-i18n="q1.role">IELTS 7.5 · Now in Germany</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__quote" data-i18n="q2.quote">
+          "My daughter started age 5. Her English is now better than some adults.
+          These teachers are incredible with children."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar testi-card__avatar--pink">NJ</div>
+          <div>
+            <strong data-i18n="q2.name">Nodira Jurayeva</strong>
+            <span   data-i18n="q2.role">Parent · Pre-school</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__quote" data-i18n="q3.quote">
+          "Scored 8.0 on my first attempt after 3 months here. The mock tests and
+          feedback sessions were invaluable."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar testi-card__avatar--yellow">SR</div>
+          <div>
+            <strong data-i18n="q3.name">Sarvar Rakhimov</strong>
+            <span   data-i18n="q3.role">IELTS 8.0 · Edinburgh Uni</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__quote" data-i18n="q4.quote">
+          "CEFR pathway gave me the structure I needed. A2 to B2 in 8 months —
+          now using English confidently at work."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar testi-card__avatar--green">BT</div>
+          <div>
+            <strong data-i18n="q4.name">Bekzod Tursunov</strong>
+            <span   data-i18n="q4.role">CEFR B2 · IT Professional</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  LOCATION SECTION
+============================================================ -->
+<section class="location section section--alt" id="location">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="loc.tag">Find Us</span>
+      <h2 class="section-title" data-i18n="loc.title">We're in Namangan</h2>
+      <p class="section-sub"    data-i18n="loc.sub">Come in for a free placement test — no appointment needed.</p>
+    </div>
+
+    <div class="location__inner">
+
+      <!-- 🗺️ MAP: Replace src with your real Google Maps embed URL -->
+      <div class="location__map">
+        <iframe
+          title="Stanford location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96170.89!2d71.6363!3d41.0011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb6ca38b8b37a9%3A0x1b!2sNamangan%2C%20Uzbekistan!5e0!3m2!1sen!2s"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <div class="location__info">
+
+        <div class="location__detail">
+          <span class="location__icon">📍</span>
+          <div>
+            <strong data-i18n="loc.addr.label">Address</strong>
+            <p      data-i18n="loc.addr.val">Namangan, Uzbekistan</p>
+          </div>
+        </div>
+
+        <div class="location__detail">
+          <span class="location__icon">🕗</span>
+          <div>
+            <strong data-i18n="loc.hours.label">Hours</strong>
+            <p      data-i18n="loc.hours.wd">Mon–Sat: 08:30 – 21:00</p>
+            <p      data-i18n="loc.hours.wk">Sunday: 09:00 – 15:00</p>
+          </div>
+        </div>
+
+        <div class="location__detail">
+          <span class="location__icon">📞</span>
+          <div>
+            <strong data-i18n="loc.phone.label">Phone</strong>
+            <a href="tel:+998991904000" class="call-link">+998 99 190 40 00</a>
+          </div>
+        </div>
+
+        <div class="location__detail">
+          <span class="location__icon"><svg class="brand-icon brand-icon--tg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Telegram">
+            <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
+            <path fill="white" d="M5.49 11.73 17.11 7.2c.56-.2 1.05.14.87.98l-1.96 9.22c-.14.64-.52.8-1.05.5l-2.9-2.14-1.4 1.35c-.15.16-.28.28-.58.28l.21-2.96 5.37-4.86c.23-.21-.05-.32-.36-.11L7.37 13.4 4.5 12.52c-.64-.2-.66-.64.99-1.18Z"/>
+          </svg></span>
+          <div>
+            <strong data-i18n="loc.tg.label">Telegram</strong>
+            <a href="https://t.me/stanfordschooluz" target="_blank" rel="noopener" class="call-link">
+              @stanfordschooluz
+            </a>
+          </div>
+        </div>
+
+        <a href="https://maps.google.com/?q=Namangan+Uzbekistan"
+           target="_blank" rel="noopener noreferrer"
+           class="btn btn--primary location__map-btn" data-i18n="loc.directions">
+          🗺️ Get Directions
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+  CONTACT SECTION
+============================================================ -->
+<section class="contact section" id="contact">
+  <div class="container contact__inner">
+
+    <div class="contact__text">
+      <span class="section-tag section-tag--light" data-i18n="contact.tag">Get in Touch</span>
+      <h2 class="section-title section-title--light" data-i18n="contact.title">Start Your Journey Today</h2>
+      <p data-i18n="contact.sub">Fill in the form and we'll reach out within 24 hours. Free placement test included.</p>
+
+      <div class="contact__channels">
+        <a href="tel:+998991904000" class="contact__channel">
+          <span>📞</span>
+          <div>
+            <strong data-i18n="contact.ch1.title">Call Us</strong>
+            <span   data-i18n="contact.ch1.val">+998 99 190 40 00</span>
+          </div>
+        </a>
+        <a href="https://t.me/stanfordschooluz" target="_blank" rel="noopener" class="contact__channel">
+          <span class="contact__channel-icon"><svg class="brand-icon brand-icon--tg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Telegram">
+            <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
+            <path fill="white" d="M5.49 11.73 17.11 7.2c.56-.2 1.05.14.87.98l-1.96 9.22c-.14.64-.52.8-1.05.5l-2.9-2.14-1.4 1.35c-.15.16-.28.28-.58.28l.21-2.96 5.37-4.86c.23-.21-.05-.32-.36-.11L7.37 13.4 4.5 12.52c-.64-.2-.66-.64.99-1.18Z"/>
+          </svg></span>
+          <div>
+            <strong data-i18n="contact.ch2.title">Telegram</strong>
+            <span   data-i18n="contact.ch2.val">@stanfordschooluz</span>
+          </div>
+        </a>
+        <div class="contact__channel">
+          <span class="contact__channel-icon"><svg class="brand-icon brand-icon--ig" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Instagram">
+            <defs>
+              <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+                <stop offset="0%"   stop-color="#fdf497"/>
+                <stop offset="5%"   stop-color="#fdf497"/>
+                <stop offset="45%"  stop-color="#fd5949"/>
+                <stop offset="60%"  stop-color="#d6249f"/>
+                <stop offset="90%"  stop-color="#285AEB"/>
+              </radialGradient>
+            </defs>
+            <rect width="24" height="24" rx="6" fill="url(#ig-grad)"/>
+            <rect x="6.5" y="6.5" width="11" height="11" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="16.8" cy="7.2" r="0.9" fill="white"/>
+          </svg></span>
+          <div>
+            <strong data-i18n="contact.ch3.title">Instagram</strong>
+            <span   data-i18n="contact.ch3.val">@stanford.lc</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact__form-wrap">
+      <form class="contact__form" id="contactForm" novalidate>
+
+        <div class="form-group">
+          <label for="name" data-i18n="form.name">Full Name</label>
+          <input type="text" id="name" name="name"
+            placeholder="Aziz Karimov" autocomplete="name" required />
+          <span class="form-group__error" id="nameError" data-i18n="form.err.name">
+            Please enter your name.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" data-i18n="form.phone">Phone Number</label>
+          <div class="phone-input-wrap">
+            <span class="phone-prefix">+998</span>
+            <input type="tel" id="phone" name="phone" id="phoneInput"
+              placeholder="XX XXX XX XX" autocomplete="tel"
+              maxlength="13" inputmode="numeric" required />
+          </div>
+          <span class="form-group__error" id="phoneError" data-i18n="form.err.phone">
+            Please enter a valid phone number.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="course" data-i18n="form.course">Course Interested In</label>
+          <select id="course" name="course" required>
+            <option value=""      data-i18n="form.course.opt0">Select a course...</option>
+            <option value="ielts" data-i18n="form.course.opt1">IELTS Intensive</option>
+            <option value="cefr"  data-i18n="form.course.opt2">CEFR Pathway (A1–C2)</option>
+            <option value="dtm"   data-i18n="form.course.opt3">DTM Preparation</option>
+            <option value="pre"   data-i18n="form.course.opt4">Pre-school English</option>
+            <option value="gen"   data-i18n="form.course.opt5">General English</option>
+          </select>
+          <span class="form-group__error" id="courseError" data-i18n="form.err.course">
+            Please select a course.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">
+            <span data-i18n="form.msg">Message</span>
+            <span class="optional" data-i18n="form.optional">(optional)</span>
+          </label>
+          <textarea id="message" name="message" rows="3"
+            placeholder="Your goal or any questions..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--yellow btn--full" data-i18n="form.submit">
+          Send Message 🚀
+        </button>
+
+        <div class="form-success" id="formSuccess" aria-live="polite" data-i18n="form.success">
+          🎉 Sent! We'll contact you within 24 hours.
+        </div>
+
+      </form>
+
+      <p class="reply-hint">
+        ⚡ <span data-i18n="form.reply">Average reply time:</span>
+        <strong data-i18n="form.replytime">under 1 hour</strong>
+      </p>
+
+      <a href="https://t.me/stanfordschooluz" target="_blank" rel="noopener noreferrer"
+         class="btn btn--whatsapp" data-i18n="form.tgbtn">
+        <svg class="brand-icon brand-icon--tg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Telegram">
+            <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
+            <path fill="white" d="M5.49 11.73 17.11 7.2c.56-.2 1.05.14.87.98l-1.96 9.22c-.14.64-.52.8-1.05.5l-2.9-2.14-1.4 1.35c-.15.16-.28.28-.58.28l.21-2.96 5.37-4.86c.23-.21-.05-.32-.36-.11L7.37 13.4 4.5 12.52c-.64-.2-.66-.64.99-1.18Z"/>
+          </svg> Message on Telegram Instead
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+  FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="container footer__inner">
+
+    <div class="footer__brand">
+      <a href="#home" class="footer__logo">Stanford<em>.lc</em></a>
+      <p data-i18n="footer.desc">
+        Namangan's leading IELTS &amp; English centre since 2015.
+        Official IDP IELTS &amp; British Council partner.
+      </p>
+      <div class="footer__socials">
+        <!-- Instagram -->
+        <a href="https://instagram.com/stanford.lc" target="_blank" rel="noopener"
+           aria-label="Instagram" class="footer__social-btn footer__social-btn--ig">
+          <svg class="brand-icon brand-icon--ig" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Instagram">
+            <defs>
+              <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+                <stop offset="0%"   stop-color="#fdf497"/>
+                <stop offset="5%"   stop-color="#fdf497"/>
+                <stop offset="45%"  stop-color="#fd5949"/>
+                <stop offset="60%"  stop-color="#d6249f"/>
+                <stop offset="90%"  stop-color="#285AEB"/>
+              </radialGradient>
+            </defs>
+            <rect width="24" height="24" rx="6" fill="url(#ig-grad)"/>
+            <rect x="6.5" y="6.5" width="11" height="11" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="16.8" cy="7.2" r="0.9" fill="white"/>
+          </svg>
+        </a>
+        <!-- Telegram -->
+        <a href="https://t.me/stanfordschooluz" target="_blank" rel="noopener"
+           aria-label="Telegram" class="footer__social-btn footer__social-btn--tg">
+          <svg class="brand-icon brand-icon--tg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Telegram">
+            <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
+            <path fill="white" d="M5.49 11.73 17.11 7.2c.56-.2 1.05.14.87.98l-1.96 9.22c-.14.64-.52.8-1.05.5l-2.9-2.14-1.4 1.35c-.15.16-.28.28-.58.28l.21-2.96 5.37-4.86c.23-.21-.05-.32-.36-.11L7.37 13.4 4.5 12.52c-.64-.2-.66-.64.99-1.18Z"/>
+          </svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://youtube.com" target="_blank" rel="noopener"
+           aria-label="YouTube" class="footer__social-btn footer__social-btn--yt">
+          <svg class="brand-icon brand-icon--yt" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="YouTube">
+            <rect width="24" height="24" rx="5" fill="#FF0000"/>
+            <path fill="white" d="M17.8 8.4a1.5 1.5 0 0 0-1.06-1.06C15.73 7 12 7 12 7s-3.73 0-4.74.34A1.5 1.5 0 0 0 6.2 8.4C5.87 9.4 5.87 12 5.87 12s0 2.6.33 3.6a1.5 1.5 0 0 0 1.06 1.06C8.27 17 12 17 12 17s3.73 0 4.74-.34a1.5 1.5 0 0 0 1.06-1.06C18.13 14.6 18.13 12 18.13 12s0-2.6-.33-3.6ZM10.5 14.5v-5l4.33 2.5-4.33 2.5Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h5 data-i18n="footer.col1.title">Programs</h5>
+      <a href="#courses" data-i18n="footer.col1.l1">IELTS Intensive</a>
+      <a href="#courses" data-i18n="footer.col1.l2">CEFR Pathway</a>
+      <a href="#courses" data-i18n="footer.col1.l3">DTM Preparation</a>
+      <a href="#courses" data-i18n="footer.col1.l4">Pre-school English</a>
+      <a href="#courses" data-i18n="footer.col1.l5">General English</a>
+    </div>
+
+    <div class="footer__col">
+      <h5 data-i18n="footer.col2.title">Company</h5>
+      <a href="#about"    data-i18n="footer.col2.l1">About Us</a>
+      <a href="#teachers" data-i18n="footer.col2.l2">Our Teachers</a>
+      <a href="#results"  data-i18n="footer.col2.l3">Student Results</a>
+      <a href="#contact"  data-i18n="footer.col2.l4">Contact</a>
+    </div>
+
+    <div class="footer__col">
+      <h5 data-i18n="footer.col3.title">Contact</h5>
+      <a href="tel:+998991904000">+998 99 190 40 00</a>
+      <a href="https://t.me/stanfordschooluz" target="_blank" rel="noopener">@stanfordschooluz</a>
+      <a href="#location" data-i18n="footer.col3.addr">Namangan, Uzbekistan</a>
+    </div>
+
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p data-i18n="footer.copy">© 2025 Stanford O'quv Markazi. All rights reserved.</p>
+      <span class="footer__badge">
+        <svg class="brand-icon brand-icon--idp brand-icon--sm" viewBox="0 0 56 28" xmlns="http://www.w3.org/2000/svg" aria-label="IDP">
+          <rect width="56" height="28" rx="5" fill="rgba(255,255,255,0.15)"/>
+          <text x="28" y="12" text-anchor="middle" fill="#F5C100" font-family="Arial,sans-serif" font-size="8" font-weight="900" letter-spacing="1">IDP</text>
+          <text x="28" y="22" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="6" font-weight="700" letter-spacing="0.5">IELTS</text>
+        </svg>
+        <svg class="brand-icon brand-icon--bc brand-icon--sm" viewBox="0 0 100 28" xmlns="http://www.w3.org/2000/svg" aria-label="British Council">
+          <rect width="100" height="28" rx="5" fill="rgba(255,255,255,0.15)"/>
+          <rect x="0" y="0" width="8" height="28" fill="rgba(0,181,226,0.6)"/>
+          <text x="57" y="12" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="7" font-weight="900" letter-spacing="0.8">BRITISH</text>
+          <text x="57" y="22" text-anchor="middle" fill="#00B5E2" font-family="Arial,sans-serif" font-size="7" font-weight="700" letter-spacing="0.8">COUNCIL</text>
+        </svg>
+        <span data-i18n="footer.badge">IDP IELTS &amp; British Council Partner</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Mobile sticky CTA bar -->
+<div class="mobile-cta-bar" id="mobileCTABar">
+  <a href="tel:+998991904000" class="btn mobile-cta-bar__call" data-i18n="cta.call">
+    📞 Call Us
+  </a>
+  <button class="btn btn--yellow" data-open="trial-modal" data-i18n="cta.apply">
+    Apply Now →
+  </button>
+</div>
+
+
+<script src="script.js"></script>
+<script src="features.js"></script>
+</body>
+</html>

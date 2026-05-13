@@ -1,0 +1,480 @@
+/* ============================================================
+   STANFORD O'QUV MARKAZI — features.css
+   Load AFTER style.css in your <head>.
+
+   Contains styles for 3 add-on features:
+   1. Telegram Floating Button
+   2. Language Toggle (UZ / RU / EN)
+   3. Free Trial Booking Modal
+============================================================ */
+
+
+/* ============================================================
+   1. TELEGRAM FLOATING BUTTON
+   ─────────────────────────────────────────────────────────
+   Fixed to bottom-right on all pages.
+   Pulses gently to attract attention.
+   Tooltip appears on hover (hidden on mobile — no space).
+   On mobile it moves above the sticky CTA bar.
+============================================================ */
+
+.tg-float {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* The round Telegram button */
+.tg-float__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #2AABEE;   /* Official Telegram blue — ✏️ change if needed */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(42, 171, 238, 0.45);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  text-decoration: none;
+  animation: tgPulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.tg-float__btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 32px rgba(42, 171, 238, 0.55);
+  animation: none; /* Stop pulse on hover — cleaner */
+}
+
+/* Telegram paper-plane SVG icon */
+.tg-float__icon {
+  width: 28px;
+  height: 28px;
+  fill: #ffffff;
+}
+
+/* Tooltip — slides in from the right on hover */
+.tg-float__tooltip {
+  background: rgba(13, 16, 37, 0.92);
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 50px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.tg-float:hover .tg-float__tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Pulse ring animation */
+@keyframes tgPulse {
+  0%, 100% { box-shadow: 0 6px 24px rgba(42,171,238,.45); }
+  50%       { box-shadow: 0 6px 36px rgba(42,171,238,.7), 0 0 0 10px rgba(42,171,238,.1); }
+}
+
+/* Mobile: move above the sticky CTA bar, hide tooltip */
+@media (max-width: 767px) {
+  .tg-float {
+    bottom: 86px;
+    right: 16px;
+  }
+  .tg-float__tooltip {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   2. LANGUAGE TOGGLE (UZ / RU / EN)
+   ─────────────────────────────────────────────────────────
+   Injected into the navbar automatically by features.js.
+   Hidden on very small phones (below 480px — no room).
+   Active language gets a filled blue pill style.
+============================================================ */
+
+/* The pill container */
+.lang-toggle {
+  display: none; /* Hidden on tiny phones */
+  align-items: center;
+  gap: 2px;
+  background: rgba(43, 63, 212, 0.07);
+  border-radius: 50px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+@media (min-width: 480px) {
+  .lang-toggle { display: flex; }
+}
+
+/* Each language button */
+.lang-toggle__btn {
+  padding: 5px 11px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6B74A8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+  min-height: 30px; /* Comfortable tap target */
+  -webkit-tap-highlight-color: transparent;
+}
+.lang-toggle__btn:hover { color: #2B3FD4; }
+
+/* Active / selected language */
+.lang-toggle__btn.active {
+  background: #2B3FD4;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(43, 63, 212, 0.3);
+}
+
+
+/* ============================================================
+   3. FREE TRIAL BOOKING MODAL
+   ─────────────────────────────────────────────────────────
+   Full-screen overlay with a 3-step booking form.
+   Opened by: any element with data-open="trial-modal"
+   Closed by: × button, overlay click, or Escape key.
+
+   Step 1 → Personal info (name + phone)
+   Step 2 → Course selection
+   Step 3 → Date + time slot picker
+   Then  → Success screen with Telegram link
+============================================================ */
+
+/* Dark blurred overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(13, 16, 37, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  /* Hidden by default — JS adds .open to show */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* White card */
+.modal {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(13, 16, 37, 0.35);
+  /* Starts lower — slides up on open */
+  transform: translateY(24px);
+  transition: transform 0.28s ease;
+  position: relative;
+}
+.modal-overlay.open .modal {
+  transform: translateY(0);
+}
+
+/* Header row: tag + title + × */
+.modal__header {
+  padding: 28px 28px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.modal__tag {
+  display: inline-block;
+  background: #EEF0FF;
+  color: #2B3FD4;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 50px;
+  margin-bottom: 8px;
+}
+.modal__title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 800;
+  color: #0D1025;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.modal__sub {
+  font-size: 0.83rem;
+  color: #5E6899;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+/* × close button */
+.modal__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #F5F6FF;
+  color: #6B74A8;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.modal__close:hover {
+  background: #EEF0FF;
+  color: #2B3FD4;
+}
+
+/* Progress steps: 1 → 2 → 3 */
+.modal__steps {
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  margin-top: 20px;
+}
+.modal__step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.modal__step:last-child { flex: 0; }
+
+.modal__step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #EEF0FF;
+  color: #6B74A8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+.modal__step.active .modal__step-dot {
+  background: #2B3FD4;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(43,63,212,.35);
+}
+.modal__step.done .modal__step-dot {
+  background: #0FD17A;
+  color: #fff;
+}
+
+/* Line connecting dots */
+.modal__step-line {
+  flex: 1;
+  height: 2px;
+  background: #E4E7F8;
+  margin: 0 4px;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+.modal__step.done .modal__step-line { background: #0FD17A; }
+
+/* Step labels — hidden on tiny phones */
+.modal__step-label { display: none; }
+@media (min-width: 480px) {
+  .modal__step-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #A0A8C8;
+  }
+  .modal__step.active .modal__step-label { color: #2B3FD4; }
+  .modal__step.done   .modal__step-label { color: #0FD17A; }
+}
+
+/* Form body */
+.modal__body { padding: 24px 28px 28px; }
+
+/* Two-column row for name + phone */
+.modal__form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 480px) {
+  .modal__form .form-row { grid-template-columns: 1fr; }
+}
+
+/* Form groups inside modal — LIGHT background (overrides dark contact form) */
+.modal__form .form-group          { margin-bottom: 16px; }
+.modal__form .form-group label    { font-size: 0.78rem; font-weight: 600; color: #5E6899; }
+
+.modal__form .form-group input,
+.modal__form .form-group select,
+.modal__form .form-group textarea {
+  background: #F5F6FF;
+  border: 1.5px solid #E4E7F8;
+  color: #0D1025;
+  border-radius: 10px;
+  padding: 11px 14px;
+  min-height: 44px;
+  font-size: 0.88rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+.modal__form .form-group input::placeholder,
+.modal__form .form-group textarea::placeholder { color: #A0A8C8; }
+
+.modal__form .form-group input:focus,
+.modal__form .form-group select:focus,
+.modal__form .form-group textarea:focus {
+  border-color: #2B3FD4;
+  background: #fff;
+}
+.modal__form .form-group.error input,
+.modal__form .form-group.error select { border-color: #FF7070; }
+.modal__form .form-group__error {
+  font-size: 0.72rem;
+  color: #FF7070;
+  display: none;
+  margin-top: 4px;
+}
+.modal__form .form-group.error .form-group__error { display: block; }
+
+/* Time slot grid — pill buttons */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+.time-slot {
+  padding: 9px 6px;
+  border: 1.5px solid #E4E7F8;
+  border-radius: 10px;
+  background: #F5F6FF;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5E6899;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.18s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.time-slot:hover    { border-color: #2B3FD4; color: #2B3FD4; background: #EEF0FF; }
+.time-slot.selected { border-color: #2B3FD4; background: #2B3FD4; color: #fff; }
+.time-slot.full     { opacity: 0.42; cursor: not-allowed; text-decoration: line-through; }
+
+/* Next / Submit button inside modal */
+.modal__submit {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px;
+  min-height: 48px;
+  background: #2B3FD4;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.22s ease, transform 0.22s ease;
+  box-shadow: 0 4px 16px rgba(43, 63, 212, 0.3);
+}
+.modal__submit:hover {
+  background: #4A5EFF;
+  transform: translateY(-2px);
+}
+
+/* Telegram fallback text + link below the form */
+.modal__tg-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: #5E6899;
+  text-align: center;
+}
+.modal__tg-fallback a { color: #2AABEE; font-weight: 700; text-decoration: none; }
+.modal__tg-fallback a:hover { text-decoration: underline; }
+
+/* Success screen shown after booking */
+.modal__success {
+  display: none; /* JS sets to flex */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 28px 36px;
+  gap: 14px;
+}
+.modal__success-icon {
+  font-size: 3.2rem;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes popIn {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.modal__success h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0D1025;
+}
+.modal__success p {
+  font-size: 0.88rem;
+  color: #5E6899;
+  line-height: 1.7;
+  max-width: 340px;
+}
+.modal__success-tg {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2AABEE;
+  color: #fff;
+  padding: 11px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  margin-top: 6px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.modal__success-tg:hover { background: #1A9BD4; transform: translateY(-2px); }

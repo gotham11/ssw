@@ -1,0 +1,1797 @@
+/* ============================================================
+   STANFORD O'QUV MARKAZI — style.css  v3.0
+   Mobile-first. All sizes fluid via clamp().
+
+   HOW TO EDIT COLOURS:
+   All brand colours are at the top in :root { }.
+   Change the hex value there and it updates everywhere.
+
+   HOW TO EDIT SPACING:
+   Uses an 8px grid. --space-1=8px, --space-2=16px, etc.
+   Change the variable and it updates everywhere it's used.
+
+   TABLE OF CONTENTS
+   ──────────────────
+   1.  Variables (colours, fonts, spacing, shadows)
+   2.  Reset & Base
+   3.  Typography Scale (all clamp() sizes)
+   4.  Layout Utilities (container, section)
+   5.  Buttons
+   6.  Navbar
+   7.  Hero Section
+   8.  Stats Band
+   9.  About Section
+   10. Courses Section
+   11. Teachers Section
+   12. Results & Achievements
+   13. Testimonials
+   14. Location
+   15. Contact & Form
+   16. Footer
+   17. Mobile Sticky CTA Bar
+   18. New Components (trial badge, call link, reply hint)
+   19. Scroll-Reveal Animation
+   20. Breakpoints — 480px / 768px / 1024px
+============================================================ */
+
+
+/* ============================================================
+   1. VARIABLES
+   ─────────────────────────────────────────────────────────
+   ✏️ Edit brand colours here — changes apply site-wide.
+============================================================ */
+:root {
+
+  /* ── Brand colours ── */
+  --clr-blue:        #2B3FD4;   /* Primary blue — buttons, accents */
+  --clr-blue-2:      #4A5EFF;   /* Lighter blue — hover states */
+  --clr-blue-light:  #EEF0FF;   /* Very light blue — tag backgrounds */
+  --clr-yellow:      #F5C100;   /* Yellow — main CTA colour */
+  --clr-yellow-dark: #D4A800;   /* Darker yellow — hover state */
+  --clr-yellow-bg:   #FFFBE6;   /* Yellow tint background */
+  --clr-green:       #0FD17A;   /* Green — score cards, success */
+  --clr-pink:        #FF4E8E;   /* Pink — pre-school badges */
+
+  /* ── Neutrals ── */
+  --clr-dark:   #0D1025;   /* Headings, high-contrast text */
+  --clr-dark-2: #1A1F4A;   /* Dark section backgrounds */
+  --clr-muted:  #5E6899;   /* Body text — comfortable to read */
+  --clr-light:  #F5F6FF;   /* Page background */
+  --clr-white:  #FFFFFF;
+  --clr-border: #E4E7F8;   /* Input borders, dividers */
+
+  /* ── Fonts ── */
+  --font-display: 'Syne', sans-serif;    /* Headings */
+  --font-body:    'DM Sans', sans-serif; /* All body text */
+
+  /* ── 8px spacing scale ──
+     Use these instead of random px values.
+     --space-1 = 8px   --space-2 = 16px  --space-3 = 24px
+     --space-4 = 32px  --space-5 = 40px  --space-6 = 48px
+     --space-8 = 64px  --space-10= 80px                    */
+  --space-1:   8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  40px;
+  --space-6:  48px;
+  --space-8:  64px;
+  --space-10: 80px;
+
+  /* ── Border radii ── */
+  --radius:    16px;
+  --radius-sm: 10px;
+  --radius-xs:  6px;
+
+  /* ── Shadows — intentionally light/subtle ── */
+  --shadow:    0 2px 16px rgba(43, 63, 212, 0.07);
+  --shadow-lg: 0 8px 36px rgba(43, 63, 212, 0.11);
+  --shadow-xl: 0 16px 56px rgba(43, 63, 212, 0.15);
+
+  /* ── Transition speed ── */
+  --transition: 0.22s ease;
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent iOS font inflation when rotating phone */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+ul  { list-style: none; }
+a   { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* Form elements inherit body font */
+input, select, textarea, button {
+  font-family: var(--font-body);
+}
+
+
+/* ============================================================
+   3. TYPOGRAPHY SCALE
+   ─────────────────────────────────────────────────────────
+   All font sizes use clamp(MIN, FLUID, MAX).
+   The browser scales smoothly between min and max.
+   No separate media query overrides needed for font sizes.
+============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--clr-dark);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em; /* Slight negative tracking — premium feel */
+}
+
+/* ── h1: Hero headline only ──
+   FIX: Reduced max from 3.6rem → 2.6rem.
+   The old value was causing the 4-line wrap on phones. */
+h1 {
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* h2: Section titles */
+h2 {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+/* h3: Card headings */
+h3 {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h4 { font-size: clamp(0.88rem, 1.4vw, 1rem); font-weight: 700; }
+h5 { font-size: 0.82rem; font-weight: 700; }
+
+/* Body paragraphs */
+p {
+  font-size: clamp(0.875rem, 1.3vw, 1rem);
+  line-height: 1.75;
+  color: var(--clr-muted);
+}
+
+strong { color: var(--clr-dark); font-weight: 600; }
+
+/* Utility: small text */
+.text-sm { font-size: clamp(0.7rem, 1vw, 0.8rem); }
+
+/* Yellow highlight in headings */
+.highlight { color: var(--clr-yellow); }
+
+
+/* ============================================================
+   4. LAYOUT UTILITIES
+============================================================ */
+
+/* Centered max-width wrapper */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  /* Fluid horizontal padding — never too tight or too wide */
+  padding-inline: clamp(var(--space-3), 5vw, var(--space-8));
+}
+
+/* Section vertical padding — scales with viewport */
+.section {
+  padding-block: clamp(var(--space-6), 8vw, var(--space-10));
+}
+
+/* White background sections */
+.section--alt { background: var(--clr-white); }
+
+/* Centered header block above grid sections */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(var(--space-5), 5vw, var(--space-8));
+}
+
+.section-title  { margin-bottom: var(--space-2); }
+
+.section-sub {
+  font-size: clamp(0.875rem, 1.3vw, 1rem);
+  line-height: 1.7;
+  color: var(--clr-muted);
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+/* Small pill label that sits above section titles */
+.section-tag {
+  display: inline-block;
+  background: var(--clr-blue-light);
+  color: var(--clr-blue);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+
+/* Light variant — for dark backgrounds */
+.section-tag--light {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Light title — for dark backgrounds */
+.section-title--light { color: var(--clr-white); }
+
+
+/* ============================================================
+   5. BUTTONS
+   ─────────────────────────────────────────────────────────
+   All buttons have min-height: 44px — Apple/Google minimum
+   tap target size. Critical for comfortable mobile use.
+============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 11px 24px;
+  min-height: 44px;   /* ← tap target minimum */
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: clamp(0.82rem, 1.2vw, 0.92rem);
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Blue — primary actions */
+.btn--primary {
+  background: var(--clr-blue);
+  color: var(--clr-white);
+  border-color: var(--clr-blue);
+  box-shadow: 0 3px 14px rgba(43, 63, 212, 0.28);
+}
+.btn--primary:hover {
+  background: var(--clr-blue-2);
+  border-color: var(--clr-blue-2);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 22px rgba(43, 63, 212, 0.38);
+}
+
+/* Yellow — main CTA */
+.btn--yellow {
+  background: var(--clr-yellow);
+  color: var(--clr-dark);
+  border-color: var(--clr-yellow);
+  box-shadow: 0 3px 14px rgba(245, 193, 0, 0.35);
+}
+.btn--yellow:hover {
+  background: var(--clr-yellow-dark);
+  border-color: var(--clr-yellow-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 22px rgba(245, 193, 0, 0.45);
+}
+
+/* Ghost — on dark backgrounds */
+.btn--outline {
+  background: transparent;
+  color: var(--clr-white);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+.btn--outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+/* Small — inside cards */
+.btn--sm {
+  padding: 8px 16px;
+  font-size: 0.78rem;
+  background: var(--clr-blue);
+  color: var(--clr-white);
+  border-color: var(--clr-blue);
+}
+.btn--sm:hover {
+  background: var(--clr-blue-2);
+  border-color: var(--clr-blue-2);
+}
+
+/* Full width */
+.btn--full { width: 100%; }
+
+/* Telegram/WhatsApp green button */
+.btn--whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 100%;
+  margin-top: var(--space-2);
+  padding: 12px;
+  min-height: 44px;
+  background: #2AABEE;        /* Telegram blue */
+  color: var(--clr-white);
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: clamp(0.82rem, 1.2vw, 0.9rem);
+  transition: var(--transition);
+  box-shadow: 0 3px 14px rgba(42, 171, 238, 0.3);
+  border: none;
+}
+.btn--whatsapp:hover {
+  background: #1A9BD4;
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   6. NAVBAR
+   ─────────────────────────────────────────────────────────
+   • Fixed at top — stays visible when scrolling
+   • .scrolled class added by JS when page scrolls down
+   • Mobile: only logo + burger visible
+   • Desktop (768px+): full link bar appears
+============================================================ */
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(43, 63, 212, 0.06);
+  height: 62px;   /* Slightly shorter on mobile — saves screen space */
+  transition: box-shadow var(--transition), background var(--transition);
+}
+
+/* Shadow appears on scroll (JS adds .scrolled) */
+.navbar.scrolled {
+  box-shadow: 0 3px 24px rgba(43, 63, 212, 0.09);
+  background: rgba(255, 255, 255, 0.97);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  gap: var(--space-3);
+}
+
+/* Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);        /* DM Sans — cleaner, modern */
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 600;                     /* softer than the old 800 */
+  letter-spacing: -0.01em;
+  color: var(--clr-dark);
+  flex-shrink: 0;
+}
+.navbar__logo em {
+  color: var(--clr-blue);
+  font-style: normal;
+  font-weight: 700;                     /* .lc slightly bolder */
+}
+.navbar__logo-icon {
+  width: 32px; height: 32px;
+  background: var(--clr-blue);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+
+/* Nav links — hidden on mobile, shown at 768px */
+.navbar__links {
+  display: none;
+  gap: 2px;
+  align-items: center;
+  margin-left: auto;
+}
+.navbar__link {
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: clamp(0.78rem, 1vw, 0.85rem);
+  font-weight: 500;
+  color: var(--clr-muted);
+  transition: var(--transition);
+}
+.navbar__link:hover,
+.navbar__link.active {
+  background: var(--clr-blue-light);
+  color: var(--clr-blue);
+}
+
+/* Desktop CTA — hidden on mobile */
+.navbar__cta { display: none; flex-shrink: 0; }
+
+/* Burger button — visible on mobile only */
+.navbar__burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  /* Enlarged tap area */
+  padding: var(--space-1);
+  min-width: 44px;
+  min-height: 44px;
+  margin-left: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+.navbar__burger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--clr-dark);
+  border-radius: 4px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Burger → X animation (JS adds .open) */
+.navbar__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar__burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.navbar__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile dropdown menu (JS adds .open to .navbar__links) */
+.navbar__links.open {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 62px; left: 0; right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  padding: var(--space-2) clamp(var(--space-3), 5vw, var(--space-8));
+  gap: 4px;
+  z-index: 998;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+  border-bottom: 1px solid var(--clr-border);
+}
+.navbar__links.open .navbar__link {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+}
+
+
+/* ============================================================
+   7. HERO SECTION
+   ─────────────────────────────────────────────────────────
+   FIXES from screenshot:
+   • min-height bounded — no tall blank area on landscape phones
+   • h1 size reduced — no more 4-line wrap on phones
+   • Trust stats use a wrapper div so + and % don't drop to
+     a new line (they're now in the same flex container)
+============================================================ */
+
+.hero {
+  background: var(--clr-dark-2);
+  /* Bounded height prevents blank space on landscape mobile */
+  min-height: min(100vh, 780px);
+  padding-top: clamp(86px, 13vw, 106px);
+  padding-bottom: clamp(var(--space-8), 8vw, 96px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Subtle dot grid background pattern */
+.hero__bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Glowing radial blobs */
+.hero__glow { position: absolute; border-radius: 50%; pointer-events: none; }
+.hero__glow--1 {
+  top: -150px; right: -60px;
+  width: clamp(240px, 40vw, 480px);
+  height: clamp(240px, 40vw, 480px);
+  background: radial-gradient(circle, rgba(43,63,212,.3) 0%, transparent 70%);
+}
+.hero__glow--2 {
+  bottom: -100px; left: 8%;
+  width: clamp(160px, 26vw, 320px);
+  height: clamp(160px, 26vw, 320px);
+  background: radial-gradient(circle, rgba(245,193,0,.11) 0%, transparent 70%);
+}
+
+/* Single column on mobile — two columns from 1024px */
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--space-2), 2vw, var(--space-3));
+}
+
+/* "Now Enrolling" pill */
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: rgba(245,193,0,.13);
+  border: 1px solid rgba(245,193,0,.28);
+  color: var(--clr-yellow);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: clamp(0.68rem, 1vw, 0.76rem);
+  font-weight: 600;
+  width: fit-content;
+}
+.hero__badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-yellow);
+  flex-shrink: 0;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.35); }
+}
+
+/* Main headline — size reduced, no more 4-line wrap on phones */
+.hero__headline {
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: var(--clr-white);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* Sub copy */
+.hero__sub {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(0.875rem, 1.4vw, 1rem);
+  line-height: 1.75;
+  max-width: 460px;
+}
+
+/* CTA buttons row */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ── Trust stats ──
+   FIX: The number and its suffix (+, %) are now wrapped in
+   .hero__trust-num so they sit on the same line always. */
+.hero__trust {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--space-2), 3vw, var(--space-4));
+  padding-top: var(--space-2);
+  flex-wrap: wrap;
+}
+.hero__trust-item {
+  display: flex;
+  flex-direction: column;
+}
+/* Wrapper keeps number + suffix on same line */
+.hero__trust-num {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.hero__trust-num strong {
+  font-family: var(--font-body);        /* DM Sans — matches floating cards */
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 600;                     /* lighter — same feel as card values */
+  color: var(--clr-white);
+  line-height: 1;
+}
+.hero__trust-suffix {
+  font-family: var(--font-body);        /* DM Sans */
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 600;
+  color: var(--clr-yellow);
+  line-height: 1;
+}
+.hero__trust-label {
+  font-size: clamp(0.62rem, 1vw, 0.72rem);
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
+}
+.hero__trust-divider {
+  width: 1px; height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  display: none; /* visible at 480px+ */
+}
+
+/* Floating cards — hidden on mobile, shown at 1024px */
+.hero__visual {
+  display: none;
+  position: relative;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+}
+.hero__card {
+  position: absolute;
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  box-shadow: var(--shadow-xl);
+  animation: float 4s ease-in-out infinite;
+}
+.hero__card--1 { top: 0;   left: 0;   width: 185px; }
+.hero__card--2 { bottom: 0; right: 0; width: 205px; animation-delay: 1.5s; }
+.hero__card--3 {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  animation-delay: .8s;
+  animation-name: float-center;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes float-center {
+  0%, 100% { transform: translate(-50%,-50%) translateY(0); }
+  50%       { transform: translate(-50%,-50%) translateY(-10px); }
+}
+.hero__card-icon  { font-size: 1.1rem; margin-bottom: 4px; }
+
+/* LABEL: small uppercase tag above the value */
+.hero__card-label {
+  font-family: var(--font-body);   /* DM Sans — lighter than Syne */
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--clr-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 3px;
+}
+
+/* VALUE: the main number/text on each card */
+.hero__card-value {
+  font-family: var(--font-body);   /* DM Sans — not the heavy display font */
+  font-size: 0.95rem;              /* Reduced from 1rem–1.1rem — less overwhelming */
+  font-weight: 700;                /* 700 not 800 — softer */
+  color: var(--clr-blue);
+  line-height: 1.2;
+}
+
+
+/* ============================================================
+   8. STATS BAND
+   2 columns on mobile, 4 columns from 768px
+============================================================ */
+
+.stats-band {
+  background: var(--clr-blue);
+  padding-block: clamp(var(--space-4), 4vw, var(--space-6));
+}
+
+.stats-band__inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 col default */
+  row-gap: var(--space-4);
+}
+
+.stats-band__item {
+  text-align: center;
+  padding-inline: var(--space-2);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+.stats-band__item:nth-child(even) { border-right: none; }
+
+/* Number + suffix wrapper (same fix as hero trust) */
+.stats-band__num {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+.stats-band__num strong {
+  font-family: var(--font-body);        /* DM Sans — clean, consistent */
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--clr-white);
+  line-height: 1;
+}
+.stats-band__num span {
+  font-size: 1.2rem;
+  color: var(--clr-yellow);
+}
+.stats-band__item p {
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+}
+
+
+/* ============================================================
+   9. ABOUT SECTION
+   Single column mobile. Two columns at 1024px.
+============================================================ */
+
+.about__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.about__text .section-title { margin-bottom: var(--space-3); }
+.about__text p               { margin-bottom: var(--space-2); }
+
+/* Values: 1 col mobile, 2 col from 480px */
+.about__values {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.about__value {
+  background: var(--clr-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  display: flex; gap: var(--space-2); align-items: flex-start;
+}
+.about__value-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.about__value strong { display: block; font-size: clamp(0.82rem, 1.1vw, 0.9rem); margin-bottom: 2px; }
+.about__value p { font-size: clamp(0.75rem, 1vw, 0.82rem); margin: 0; }
+
+/* Stat cards (right column — desktop) */
+.about__cards { display: flex; flex-direction: column; gap: var(--space-2); }
+.about__stat-card {
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.about__stat-card--blue   { background: var(--clr-blue);   color: var(--clr-white); }
+.about__stat-card--yellow { background: var(--clr-yellow); color: var(--clr-dark);  }
+.about__stat-card--dark   { background: var(--clr-dark-2); color: var(--clr-white); }
+.about__stat-num   { font-family: var(--font-body); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1; }
+.about__stat-label { font-size: clamp(0.7rem, 1vw, 0.78rem); opacity: 0.68; margin-top: 4px; }
+.about__stat-emoji { font-size: 1.8rem; }
+.about__partner {
+  display: flex; align-items: center; gap: var(--space-1);
+  background: var(--clr-yellow-bg);
+  border: 2px solid var(--clr-yellow);
+  border-radius: var(--radius); padding: var(--space-2);
+}
+.about__partner span:last-child {
+  font-weight: 700;
+  font-size: clamp(0.78rem, 1.1vw, 0.87rem);
+  color: var(--clr-dark);
+}
+
+
+/* ============================================================
+   10. COURSES SECTION
+============================================================ */
+
+.courses__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-3);
+}
+
+.course-card {
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+/* Gradient banner at top of each card */
+.course-card__thumb {
+  height: 96px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem;
+}
+.course-card__thumb--blue   { background: linear-gradient(135deg, var(--clr-blue),  #7B8FFF); }
+.course-card__thumb--yellow { background: linear-gradient(135deg, #D4A800, var(--clr-yellow)); }
+.course-card__thumb--green  { background: linear-gradient(135deg, #0AA860, var(--clr-green)); }
+.course-card__thumb--pink   { background: linear-gradient(135deg, #CC0060, var(--clr-pink));  }
+
+
+
+/* Pill badge */
+.course-card__badge {
+  display: inline-block; padding: 3px 10px; border-radius: 50px;
+  font-size: 0.7rem; font-weight: 700; margin-bottom: var(--space-1);
+}
+.course-card__badge--blue   { background: var(--clr-blue-light);            color: var(--clr-blue); }
+.course-card__badge--yellow { background: rgba(245,193,0,.14);               color: #7A5E00; }
+.course-card__badge--green  { background: rgba(15,209,122,.11);              color: #006B40; }
+.course-card__badge--pink   { background: rgba(255,78,142,.1);               color: #9E0042; }
+
+
+
+
+
+
+
+/* ============================================================
+   11. TEACHERS SECTION
+============================================================ */
+
+.teachers__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--space-3);
+}
+
+.teacher-card {
+  background: var(--clr-white); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.teacher-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+.teacher-card__avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  margin: var(--space-4) auto 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  border: 3px solid var(--clr-white);
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
+}
+.teacher-card__avatar--blue   { background: linear-gradient(135deg, var(--clr-blue),  var(--clr-blue-2)); }
+.teacher-card__avatar--yellow { background: linear-gradient(135deg, #D4A800,           var(--clr-yellow)); }
+.teacher-card__avatar--pink   { background: linear-gradient(135deg, #CC0060,           var(--clr-pink));   }
+.teacher-card__avatar--green  { background: linear-gradient(135deg, #0AA860,           var(--clr-green));  }
+
+.teacher-card__body { padding: var(--space-2) var(--space-3) var(--space-3); text-align: center; }
+.teacher-card__name { margin-bottom: 3px; }
+.teacher-card__role { font-size: clamp(0.7rem, 1vw, 0.8rem); color: var(--clr-blue); font-weight: 600; margin-bottom: var(--space-2); }
+
+.teacher-card__stats {
+  display: flex; flex-direction: column; gap: 5px;
+  margin-bottom: var(--space-2); text-align: left;
+  padding: var(--space-1) var(--space-2);
+  background: var(--clr-light); border-radius: var(--radius-sm);
+}
+.teacher-card__stats li     { font-size: clamp(0.7rem, 1vw, 0.78rem); color: var(--clr-muted); }
+.teacher-card__stats strong { color: var(--clr-dark); font-weight: 600; }
+
+.teacher-card__bio {
+  font-size: clamp(0.75rem, 1vw, 0.8rem);
+  line-height: 1.6; margin-bottom: var(--space-2); text-align: left;
+}
+.teacher-card__tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.teacher-card__tags span {
+  background: var(--clr-blue-light); color: var(--clr-blue);
+  padding: 3px 9px; border-radius: 50px; font-size: 0.68rem; font-weight: 700;
+}
+
+
+/* ============================================================
+   12. RESULTS & ACHIEVEMENTS
+============================================================ */
+
+.results__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-2); margin-bottom: var(--space-8);
+}
+
+.score-card {
+  background: var(--clr-white); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.score-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+.score-card__top {
+  background: linear-gradient(135deg, var(--clr-blue), var(--clr-blue-2));
+  padding: var(--space-2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.score-card__top--gold  { background: linear-gradient(135deg, #D4A800,  var(--clr-yellow)); }
+.score-card__top--green { background: linear-gradient(135deg, #0AA860,  var(--clr-green));  }
+
+.score-card__avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-body); font-size: 0.82rem; font-weight: 600;
+  color: var(--clr-white); flex-shrink: 0;
+}
+.score-card__bands { display: flex; align-items: center; gap: var(--space-1); }
+.score-card__val {
+  display: block; font-family: var(--font-body);   /* DM Sans — matches stats */
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 600; color: var(--clr-white); line-height: 1;
+}
+.score-card__lbl {
+  display: block; font-size: 0.6rem;
+  color: rgba(255,255,255,.6); text-transform: uppercase; margin-top: 3px;
+}
+.score-card__arrow { color: rgba(255,255,255,.75); font-size: 1rem; font-weight: 700; }
+
+.score-card__body { padding: var(--space-2); }
+.score-card__body strong { display: block; font-size: clamp(0.82rem, 1.1vw, 0.9rem); margin-bottom: 2px; }
+.score-card__body p      { font-size: 0.73rem; margin-bottom: var(--space-1); }
+.score-card__tag {
+  display: inline-block; background: var(--clr-blue-light); color: var(--clr-blue);
+  padding: 2px 9px; border-radius: 50px; font-size: 0.7rem; font-weight: 700;
+}
+
+/* Achievement number bar — 2 col mobile, 4 col from 768px */
+.achievements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: var(--clr-dark-2); border-radius: var(--radius);
+  overflow: hidden;
+  padding: clamp(var(--space-4), 4vw, var(--space-6)) 0;
+}
+.achievement {
+  text-align: center; padding-inline: var(--space-2);
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.achievement:nth-child(even) { border-right: none; }
+/* Add top border on bottom row (2-col layout) */
+.achievement:nth-child(3),
+.achievement:nth-child(4) {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: var(--space-4); margin-top: var(--space-4);
+}
+.achievement strong {
+  display: block; font-family: var(--font-body);   /* DM Sans — consistent */
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 600; color: var(--clr-white); line-height: 1;
+}
+.achievement span { color: var(--clr-yellow); font-size: 1.3rem; }
+.achievement p    { font-size: clamp(0.7rem, 1vw, 0.8rem); color: rgba(255,255,255,.4); margin-top: 5px; }
+
+
+/* ============================================================
+   13. TESTIMONIALS
+============================================================ */
+
+.testi__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-3);
+}
+.testi-card {
+  background: var(--clr-white); border-radius: var(--radius);
+  padding: var(--space-4); box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.testi-card__stars { color: var(--clr-yellow); font-size: 0.9rem; letter-spacing: 2px; }
+.testi-card__quote {
+  font-size: clamp(0.82rem, 1.2vw, 0.9rem);
+  line-height: 1.75; color: var(--clr-dark); font-style: italic; flex-grow: 1;
+}
+.testi-card__author { display: flex; align-items: center; gap: var(--space-2); }
+.testi-card__avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+  color: var(--clr-white); flex-shrink: 0;
+}
+.testi-card__avatar--blue   { background: var(--clr-blue);        }
+.testi-card__avatar--yellow { background: var(--clr-yellow-dark); }
+.testi-card__avatar--pink   { background: var(--clr-pink);        }
+.testi-card__avatar--green  { background: var(--clr-green);       }
+.testi-card__author strong { display: block; font-size: clamp(0.82rem, 1.1vw, 0.9rem); }
+.testi-card__author span   { font-size: clamp(0.68rem, 1vw, 0.76rem); color: var(--clr-muted); }
+
+
+/* ============================================================
+   14. LOCATION
+   Single column mobile. Two columns from 768px.
+============================================================ */
+
+.location__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6); align-items: start;
+}
+.location__map {
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  height: clamp(220px, 38vw, 380px);
+}
+.location__map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.location__info { display: flex; flex-direction: column; gap: var(--space-2); }
+.location__detail {
+  background: var(--clr-light); border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  display: flex; gap: var(--space-2); align-items: flex-start;
+}
+.location__icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.location__detail strong {
+  display: block; font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .3px;
+  color: var(--clr-muted); margin-bottom: 3px;
+}
+.location__detail p { font-size: clamp(0.8rem, 1.1vw, 0.87rem); font-weight: 500; color: var(--clr-dark); margin: 0; }
+.location__map-btn { margin-top: 4px; }
+
+
+/* ============================================================
+   15. CONTACT & FORM
+   Single column mobile. Two columns from 768px.
+============================================================ */
+
+.contact { background: var(--clr-dark-2); }
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6); align-items: start;
+}
+.contact__text p { color: rgba(255,255,255,.48); margin-bottom: var(--space-4); }
+
+.contact__channels { display: flex; flex-direction: column; gap: var(--space-2); }
+.contact__channel {
+  display: flex; align-items: center; gap: var(--space-2);
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--radius-sm); padding: var(--space-2);
+  transition: var(--transition); cursor: pointer; min-height: 44px;
+}
+.contact__channel:hover { background: rgba(255,255,255,.09); transform: translateX(4px); }
+.contact__channel > span:first-child { font-size: 1.3rem; }
+.contact__channel strong { display: block; font-size: clamp(0.8rem, 1.1vw, 0.85rem); color: var(--clr-white); }
+.contact__channel span:last-child { font-size: clamp(0.68rem, 1vw, 0.78rem); color: rgba(255,255,255,.4); }
+
+.contact__form-wrap {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--radius);
+  padding: clamp(var(--space-3), 4vw, var(--space-5));
+}
+
+/* Form fields */
+.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: var(--space-3); }
+.form-group label { font-size: clamp(0.73rem, 1vw, 0.8rem); font-weight: 600; color: rgba(255,255,255,.52); }
+.optional { font-weight: 400; opacity: .6; }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.11);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px; min-height: 44px;
+  font-size: clamp(0.82rem, 1.1vw, 0.88rem);
+  font-family: var(--font-body); color: var(--clr-white);
+  outline: none; transition: border-color var(--transition); width: 100%;
+}
+.form-group select option { background: var(--clr-dark-2); color: var(--clr-white); }
+.form-group textarea { resize: vertical; min-height: 88px; }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--clr-yellow);
+  background: rgba(255,255,255,.09);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,.27); }
+
+/* Validation errors */
+.form-group__error { font-size: 0.72rem; color: #FF7070; display: none; }
+.form-group.error .form-group__error { display: block; }
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea { border-color: #FF7070; }
+
+/* Success message after submit */
+.form-success {
+  display: none; text-align: center; padding: var(--space-3);
+  background: rgba(15,209,122,.11); border: 1px solid rgba(15,209,122,.28);
+  border-radius: var(--radius-sm); color: var(--clr-green);
+  font-weight: 600; font-size: clamp(0.82rem, 1.1vw, 0.9rem);
+  margin-top: var(--space-2);
+  animation: fadeIn .4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   16. FOOTER
+   1 col mobile → 2 col at 480px → 4 col at 768px
+============================================================ */
+
+.footer { background: var(--clr-dark); }
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  padding-top:    clamp(var(--space-6), 6vw, var(--space-8));
+  padding-bottom: clamp(var(--space-5), 5vw, var(--space-8));
+}
+.footer__logo {
+  display: block; font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 600;
+  color: var(--clr-white); margin-bottom: var(--space-2);
+}
+.footer__logo em { color: var(--clr-yellow); font-style: normal; }
+.footer__brand p {
+  font-size: clamp(0.78rem, 1vw, 0.82rem);
+  color: rgba(255,255,255,.38); line-height: 1.75; margin-bottom: var(--space-3);
+}
+.footer__socials { display: flex; gap: var(--space-1); }
+
+
+
+.footer__col h5 {
+  color: rgba(255,255,255,.7); font-size: 0.78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: var(--space-2);
+}
+.footer__col a {
+  display: block; font-size: clamp(0.78rem, 1vw, 0.82rem);
+  color: rgba(255,255,255,.35); margin-bottom: var(--space-1);
+  transition: color var(--transition);
+}
+.footer__col a:hover { color: var(--clr-yellow); }
+
+.footer__bottom { border-top: 1px solid rgba(255,255,255,.06); }
+.footer__bottom-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-block: var(--space-3); flex-wrap: wrap; gap: var(--space-2);
+}
+.footer__bottom p { font-size: clamp(0.68rem, 1vw, 0.75rem); color: rgba(255,255,255,.2); margin: 0; }
+.footer__badge {
+  background: rgba(245,193,0,.11); border: 1px solid rgba(245,193,0,.22);
+  color: var(--clr-yellow); padding: 4px 12px; border-radius: 50px;
+  font-size: 0.7rem; font-weight: 700;
+}
+
+
+/* ============================================================
+   17. MOBILE STICKY CTA BAR
+   ─────────────────────────────────────────────────────────
+   Fixed to the bottom of the screen on phones.
+   Hidden automatically at 768px (desktop).
+   JS hides it when user scrolls into the contact section.
+============================================================ */
+
+.mobile-cta-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 990;
+  background: rgba(255, 255, 255, 0.97);
+  border-top: 1px solid var(--clr-border);
+  padding: var(--space-2) clamp(var(--space-3), 5vw, var(--space-5));
+  display: flex;
+  gap: var(--space-2);
+  box-shadow: 0 -4px 24px rgba(43, 63, 212, 0.1);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Slide out when .hidden added by JS */
+.mobile-cta-bar.hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Call button — outlined dark style */
+.mobile-cta-bar__call {
+  background: transparent;
+  color: var(--clr-blue);
+  border: 2px solid var(--clr-blue);
+  flex: 1;
+}
+.mobile-cta-bar__call:hover {
+  background: var(--clr-blue-light);
+}
+
+/* Apply Now takes more space */
+.mobile-cta-bar .btn--yellow { flex: 1.4; }
+
+/* Body padding prevents content hiding behind the bar */
+body { padding-bottom: 76px; }
+
+
+/* ============================================================
+   18. NEW COMPONENTS
+   ─────────────────────────────────────────────────────────
+   Trial date badge, call-link, reply hint
+============================================================ */
+
+/* 🗓 Next free trial badge — sits below hero trust stats */
+.trial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 8px 14px;
+  font-size: clamp(0.72rem, 1vw, 0.8rem);
+  color: rgba(255, 255, 255, 0.75);
+  flex-wrap: wrap;
+  width: fit-content;
+  margin-top: var(--space-1);
+}
+.trial-badge__icon { font-size: 1rem; flex-shrink: 0; }
+.trial-badge strong { color: var(--clr-yellow); }
+.trial-badge__spots { color: #FF9A3C; font-weight: 600; }
+.trial-badge__btn {
+  background: var(--clr-yellow);
+  color: var(--clr-dark);
+  border: none; cursor: pointer;
+  padding: 4px 12px; border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.72rem; font-weight: 700;
+  transition: var(--transition);
+  min-height: 28px;
+  -webkit-tap-highlight-color: transparent;
+}
+.trial-badge__btn:hover {
+  background: var(--clr-yellow-dark);
+  transform: scale(1.04);
+}
+
+/* 📞 Click-to-call link style */
+.call-link {
+  display: block;
+  font-size: clamp(0.82rem, 1.1vw, 0.9rem);
+  font-weight: 600;
+  color: var(--clr-blue);
+  transition: color var(--transition);
+  margin-top: 2px;
+}
+.call-link:hover { color: var(--clr-blue-2); text-decoration: underline; }
+
+/* ⚡ Reply time hint — under the contact form */
+.reply-hint {
+  text-align: center;
+  font-size: clamp(0.75rem, 1vw, 0.82rem);
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+}
+.reply-hint strong { color: var(--clr-green); }
+
+
+/* ============================================================
+   19. SCROLL-REVEAL ANIMATION
+   Added via JS — elements fade up when they enter view.
+============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   20. BREAKPOINTS
+   ─────────────────────────────────────────────────────────
+   Mobile-first: base styles above are for small phones.
+   Each breakpoint ADDS or OVERRIDES for larger screens.
+
+   480px  — larger phones / landscape
+   768px  — tablets
+   1024px — desktop
+============================================================ */
+
+/* ── 480px: larger phones ── */
+@media (min-width: 480px) {
+
+  /* About values: 2 columns */
+  .about__values { grid-template-columns: repeat(2, 1fr); }
+
+  /* Hero trust dividers appear */
+  .hero__trust-divider { display: block; }
+
+  /* Hero actions: no longer wrap */
+  .hero__actions { flex-wrap: nowrap; }
+
+  /* Footer: 2-col, brand spans full row */
+  .footer__inner { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+/* ── 768px: tablets ── */
+@media (min-width: 768px) {
+
+  /* Navbar: show links, hide burger */
+  .navbar { height: 66px; }
+  .navbar__inner { height: 66px; }
+  .navbar__links {
+    display: flex !important; /* override JS .open toggling */
+    position: static;
+    flex-direction: row;
+    background: none; box-shadow: none; border: none;
+    padding: 0; gap: 2px;
+  }
+  .navbar__link { padding: 6px 12px; }
+  .navbar__cta    { display: inline-flex; }
+  .navbar__burger { display: none; }
+
+  /* Hide mobile sticky CTA bar */
+  .mobile-cta-bar { display: none; }
+  body { padding-bottom: 0; }
+
+  /* Stats band: 4 columns */
+  .stats-band__inner { grid-template-columns: repeat(4, 1fr); row-gap: 0; }
+  .stats-band__item { border-right: 1px solid rgba(255,255,255,.12); }
+  .stats-band__item:nth-child(even) { border-right: 1px solid rgba(255,255,255,.12); }
+  .stats-band__item:last-child { border-right: none; }
+
+  /* Achievements: 4 columns */
+  .achievements { grid-template-columns: repeat(4, 1fr); }
+  .achievement:nth-child(3),
+  .achievement:nth-child(4) {
+    border-top: none; padding-top: 0; margin-top: 0;
+  }
+  .achievement:nth-child(even) { border-right: 1px solid rgba(255,255,255,.08); }
+  .achievement:last-child { border-right: none; }
+
+  /* Location: 2 columns */
+  .location__inner { grid-template-columns: 1fr 1fr; }
+
+  /* Contact: 2 columns */
+  .contact__inner { grid-template-columns: 1fr 1fr; }
+
+  /* Footer: 4 columns */
+  .footer__inner { grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: var(--space-8); }
+  .footer__brand { grid-column: auto; }
+  .footer__bottom-inner { flex-direction: row; }
+}
+
+/* ── 1024px: desktop ── */
+@media (min-width: 1024px) {
+
+  .navbar { height: 68px; }
+  .navbar__inner { height: 68px; }
+
+  /* Hero: 2 columns, show floating cards */
+  .hero__inner { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+  .hero__visual { display: flex; }
+
+  /* About: 2 columns */
+  .about__inner { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+
+/* ============================================================
+   ADDITIONS v4 — Phone prefix, logos, enroll fix, social icons, mobile lang
+============================================================ */
+
+/* ── Phone input with fixed +998 prefix ── */
+.phone-input-wrap {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.phone-input-wrap:focus-within {
+  border-color: var(--clr-yellow);
+  background: rgba(255,255,255,.09);
+}
+.phone-prefix {
+  padding: 11px 10px 11px 14px;
+  font-size: clamp(0.82rem, 1.1vw, 0.88rem);
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--clr-yellow);
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+  border-right: 1px solid rgba(255,255,255,.11);
+}
+.phone-input-wrap input {
+  /* Remove individual styling — parent wrap handles it */
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding-left: 8px !important;
+  flex: 1;
+  min-width: 0;
+}
+.phone-input-wrap input:focus {
+  outline: none;
+  border: none !important;
+}
+
+/* ── IDP / British Council partner logos ── */
+.about__partner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.partner-logo {
+  height: 26px;
+  width: auto;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: opacity var(--transition);
+}
+.partner-logo--idp  { width: 52px; }
+.partner-logo--bc   { width: 90px; }
+.partner-logo--sm   { height: 20px; }
+.partner-logo--idp.partner-logo--sm  { width: 42px; }
+.partner-logo--bc.partner-logo--sm   { width: 72px; }
+.partner-logo:hover { opacity: 0.85; }
+
+/* Footer badge with logos */
+.footer__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+/* ── Course card meta row — enroll button alignment ── */
+.course-card__meta {
+  display: flex;
+  align-items: center;      /* vertically centre button + text */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: auto;          /* push to bottom of card */
+  padding-top: var(--space-1);
+}
+.course-card__meta span {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--clr-muted);
+  line-height: 1;            /* prevent text from pushing button off-axis */
+}
+.course-card__meta .btn--sm {
+  min-height: 36px;          /* slightly smaller than global 44px for card context */
+  padding: 7px 16px;
+  flex-shrink: 0;
+}
+/* Make card body a flex column so meta always sits at the bottom */
+.course-card__body {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 96px); /* 96px = thumb height */
+  padding: var(--space-3);
+}
+.course-card__body h3 { margin-bottom: var(--space-1); }
+.course-card__body > p {
+  flex: 1;                   /* paragraph takes available space */
+  font-size: clamp(0.8rem, 1.1vw, 0.88rem);
+  line-height: 1.65;
+  margin-bottom: var(--space-2);
+}
+
+/* ── Footer social icon buttons ── */
+.footer__social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform var(--transition), color var(--transition);
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+}
+.footer__social-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.footer__social-btn:hover {
+  transform: translateY(-3px);
+  color: #fff;
+}
+/* Brand colours on hover */
+.footer__social-btn--ig:hover { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.footer__social-btn--tg:hover { background: #2AABEE; }
+.footer__social-btn--yt:hover { background: #FF0000; }
+
+
+
+
+.navbar__mobile-lang .lang-toggle__btn.active {
+  background: var(--clr-blue);
+  color: #fff;
+  border-color: var(--clr-blue);
+}
+.navbar__mobile-lang .lang-toggle__btn:hover:not(.active) {
+  border-color: var(--clr-blue);
+  color: var(--clr-blue);
+}
+
+
+.navbar__links.open 
+
+
+/* 320px — very small phones */
+@media (max-width: 360px) {
+  .navbar__logo span { font-size: 0.88rem; }
+  .navbar__logo-icon { width: 28px; height: 28px; font-size: 0.85rem; }
+  .hero__headline { font-size: 1.35rem; }
+  .trial-badge { font-size: 0.65rem; }
+  .stats-band__num strong { font-size: 1.3rem; }
+}
+
+/* 375–425px — standard phones */
+@media (max-width: 425px) {
+  .course-card__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+  .course-card__meta .btn--sm { width: 100%; justify-content: center; }
+  .hero__actions { flex-direction: column; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
+}
+
+/* 768px — tablet */
+@media (max-width: 768px) {
+  /* Ensure lang toggle inside menu is shown, desktop toggle hidden */
+  .lang-toggle { display: none !important; }
+}
+@media (min-width: 769px) {
+  /* Desktop: hide the in-menu lang row */
+  
+  /* Show the injected desktop toggle */
+  .lang-toggle { display: flex; }
+}
+
+/* ============================================================
+   MOBILE LANG TOGGLE — beside the burger button
+   Always visible on mobile screens as 3 small pill buttons.
+   Hidden on desktop (features.js injects the proper toggle there).
+============================================================ */
+
+/* The wrapper sits in the navbar between the CTA and the burger */
+.navbar__mobile-lang {
+  display: none;              /* hidden by default — shown below 768px */
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+/* Each pill button */
+.navbar__mobile-lang .lang-toggle__btn {
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1.5px solid var(--clr-border);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--clr-muted);
+  cursor: pointer;
+  line-height: 1;
+  min-height: 30px;
+  min-width: 30px;
+  text-align: center;
+  transition: all 0.18s ease;
+  letter-spacing: 0.3px;
+  -webkit-tap-highlight-color: transparent;
+}
+.navbar__mobile-lang .lang-toggle__btn:hover {
+  border-color: var(--clr-blue);
+  color: var(--clr-blue);
+}
+.navbar__mobile-lang .lang-toggle__btn.active {
+  background: var(--clr-blue);
+  border-color: var(--clr-blue);
+  color: #ffffff;
+}
+
+/* ── Show on mobile (below 768px), hide on desktop ── */
+@media (max-width: 767px) {
+  .navbar__mobile-lang {
+    display: flex;    /* visible beside the burger */
+  }
+  /* Hide the desktop lang toggle injected by features.js */
+  .lang-toggle {
+    display: none !important;
+  }
+}
+
+/* ── Desktop: hide mobile lang, show features.js toggle ── */
+@media (min-width: 768px) {
+  .navbar__mobile-lang {
+    display: none !important;
+  }
+  .navbar { height: 66px; }
+  .navbar__inner { height: 66px; }
+  .navbar__links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    gap: 2px;
+  }
+  .navbar__link  { padding: 6px 12px; }
+  .navbar__cta   { display: inline-flex; }
+  .navbar__burger { display: none; }
+  .mobile-cta-bar { display: none; }
+  body { padding-bottom: 0; }
+  .lang-toggle { display: flex; }
+}
+
+/* ── 320px: tiny phones — make pills even smaller ── */
+@media (max-width: 360px) {
+  .navbar__mobile-lang .lang-toggle__btn {
+    padding: 4px 6px;
+    font-size: 0.62rem;
+    min-width: 26px;
+    min-height: 26px;
+  }
+  .navbar__logo span { font-size: 0.88rem; }
+  .navbar__logo-icon { width: 28px; height: 28px; }
+}
+
+/* ============================================================
+   BRAND LOGOS & ICONS
+   ─────────────────────────────────────────────────────────
+   Consistent sizing for all brand SVG icons:
+   Telegram, Instagram, YouTube, IDP, British Council
+============================================================ */
+
+/* ── Base brand icon ── */
+.brand-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* ── Social icons (Telegram, Instagram, YouTube) ── */
+.brand-icon--tg,
+.brand-icon--ig,
+.brand-icon--yt {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+/* ── IDP & British Council partner logos ── */
+.brand-icon--idp { width: 52px;  height: 26px; border-radius: 5px; }
+.brand-icon--bc  { width: 90px;  height: 26px; border-radius: 5px; }
+
+/* Small variants (footer badge) */
+.brand-icon--sm.brand-icon--idp { width: 40px; height: 20px; }
+.brand-icon--sm.brand-icon--bc  { width: 70px; height: 20px; }
+
+/* ── About partner section ── */
+.about__partner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--clr-yellow-bg);
+  border: 2px solid var(--clr-yellow);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+}
+.about__partner > span { font-weight: 700; font-size: clamp(0.78rem, 1.1vw, 0.87rem); color: var(--clr-dark); }
+
+/* ── Hero floating card — partner logos ── */
+.hero__card-partner-logos {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.hero__card-partner-logos .brand-icon--idp { width: 38px; height: 20px; }
+.hero__card-partner-logos .brand-icon--bc  { width: 66px; height: 20px; }
+
+.hero__card-value--sm {
+  font-size: 0.78rem;
+  color: var(--clr-muted);
+}
+
+/* ── Location detail icon ── */
+.location__icon .brand-icon--tg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Contact channel icon ── */
+.contact__channel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+.contact__channel-icon .brand-icon--tg,
+.contact__channel-icon .brand-icon--ig {
+  width: 28px;
+  height: 28px;
+}
+
+/* ── Telegram button (form bottom) ── */
+.btn--whatsapp .brand-icon--tg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Footer social buttons ── */
+.footer__social-btn .brand-icon--tg,
+.footer__social-btn .brand-icon--ig,
+.footer__social-btn .brand-icon--yt {
+  width: 24px;
+  height: 24px;
+}
+/* Remove background on the button itself — icon has its own bg */
+.footer__social-btn {
+  background: transparent !important;
+  padding: 4px;
+}
+.footer__social-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  background: transparent !important;
+}
+
+/* ── Footer badge logos ── */
+.footer__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+/* ── Mobile: scale logos down slightly ── */
+@media (max-width: 480px) {
+  .brand-icon--idp { width: 44px; height: 22px; }
+  .brand-icon--bc  { width: 76px; height: 22px; }
+}
